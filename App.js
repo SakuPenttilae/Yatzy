@@ -15,10 +15,8 @@ const SCOREBOARD = "Scoreboard";
 
 export default function App() {
   return (
-    
-    <NavigationContainer>
-      
-      <Tab.Navigator>
+    <NavigationContainer style={styles.container}>
+      <Tab.Navigator initialRouteName='Home'>
       <Tab.Screen name='Home' component={Home}/>
       <Tab.Screen name='Gameboard' component={GameBoard}/>
     </Tab.Navigator>
