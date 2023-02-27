@@ -6,7 +6,6 @@ export default StyleSheet.create({
     backgroundColor: '#fff'
   },
   header: {
-    marginTop: 30,
     marginBottom: 15,
     backgroundColor: 'skyblue',
     flexDirection: 'row',
@@ -64,5 +63,10 @@ export default StyleSheet.create({
   buttonText: {
     color:"#2B2B52",
     fontSize: 20
+  },
+  pikkuCont: {
+    flex: 3,
+    margin:10,
+    textAlign:"center"
   }
 });
