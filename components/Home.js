@@ -6,17 +6,21 @@ import { Button, TextInput } from "react-native-paper";
 import styles from "../styles/style";
 import React, { useState, useEffect } from "react";
 
-
-
-export default function App() {
+export default function Home({navigation}) {
   
   const [loaded,setLoaded] = useState(true)
   const [rules,setRules] = useState(false)
   const [name, setName] = useState("")
-
+  
   function goToRules() {
     setLoaded(false)
     setRules(true)
+  }
+
+  function goToGame() {
+    setRules(false)
+    setLoaded(true)
+    navigation.navigate('Gameboard', {name})
   }
 
   return (
@@ -51,7 +55,7 @@ export default function App() {
         <Text style={{fontSize:20, textAlign:"center"}}>
           Good luck, {name}!
         </Text>
-        <Button>Play</Button>
+        <Button onPress={ goToGame() }>Play</Button>
       </View>
       }
       <Footer/>
