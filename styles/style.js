@@ -11,7 +11,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   footer: {
-    marginTop: 20,
+    marginTop: 15,
     backgroundColor: '#ccb3ff',
     flexDirection: 'row'
   },
@@ -19,17 +19,18 @@ export default StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     flex: 1,
-    fontSize: 23,
+    fontSize: 21,
     textAlign: 'center',
-    margin: 10,
+    padding: 5
   },
-  author: {
-    color: '#fff',
+  copy: {
+    color: 'white',
     fontWeight: 'bold',
     flex: 1,
-    fontSize: 15,
+    fontSize: 14,
     textAlign: 'center',
-    margin: 10,
+    padding: 5
+    
   },
   gameboard: {
     backgroundColor: '#fff',
@@ -49,13 +50,14 @@ export default StyleSheet.create({
     alignSelf: "center",
     margin: 10,
     borderRadius: 0,
-    backgroundColor: "#ccb3ff"
+    backgroundColor: "#ccb3ff",
+    
   },
   textInput: {
     backgroundColor: "#ccb3ff"
   },
   pikkuCont: {
-    flex: 3,
+    flex: 4,
     margin:10,
     textAlign:"center"
   },
