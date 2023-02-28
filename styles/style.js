@@ -7,12 +7,12 @@ export default StyleSheet.create({
   },
   header: {
     marginBottom: 15,
-    backgroundColor: 'skyblue',
+    backgroundColor: '#ccb3ff',
     flexDirection: 'row',
   },
   footer: {
     marginTop: 20,
-    backgroundColor: 'skyblue',
+    backgroundColor: '#ccb3ff',
     flexDirection: 'row'
   },
   title: {
@@ -43,30 +43,24 @@ export default StyleSheet.create({
     fontSize: 20,
     marginTop: 10
   },
-  row: {
-    marginTop: 20,
-    padding: 10
-  },
-  flex: {
-    flexDirection: "row"
-  },
   button: {
-    margin: 30,
-    flexDirection: "row",
-    padding: 10,
-    backgroundColor: "#73CED6",
-    width: 150,
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center'
+    borderColor: "black",
+    borderWidth: 1,
+    alignSelf: "center",
+    margin: 10,
+    borderRadius: 0,
+    backgroundColor: "#ccb3ff"
   },
-  buttonText: {
-    color:"#2B2B52",
-    fontSize: 20
+  textInput: {
+    backgroundColor: "#ccb3ff"
   },
   pikkuCont: {
     flex: 3,
     margin:10,
     textAlign:"center"
+  },
+  textAlign: {
+    textAlign: "center",
+    marginBottom: 5
   }
 });

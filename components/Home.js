@@ -5,32 +5,44 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Button, TextInput } from "react-native-paper";
 import styles from "../styles/style";
 import React, { useState, useEffect } from "react";
+import style from "../styles/style";
 
 export default function Home({navigation}) {
   
-  const [loaded,setLoaded] = useState(true)
+  const [input,setInput] = useState(true)
   const [rules,setRules] = useState(false)
   const [name, setName] = useState("")
   
   function goToRules() {
-    setLoaded(false)
-    setRules(true)
+    //if no name is input, then user will be told so
+    if (name.length<=0) {
+      alert("You must input your name")
+    } else {
+      // if name is input, then hide input and show rules 
+      setInput(false)
+      setRules(true)
+    }
   }
 
   function goToGame() {
+    //if rules are read and user wants to continue, hide rules 
     setRules(false)
-    setLoaded(true)
+    //make input visible on home screen if user decides he wants to change name
+    setInput(true)
+    //user moves to game, set name is passed as parameter
     navigation.navigate('Gameboard', {name})
+    //name is emptied on home screen if user comes back to change name
+    setName("")
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Header/>
-      {loaded==true && 
+      {input==true && 
         <SafeAreaView style={styles.container}>
-          <Text>Input your name please</Text>
-          <TextInput onChangeText={t => setName(t)}></TextInput>
-          <Button onPress={()=>goToRules()}>Done</Button>
+          <Text style={styles.textAlign}>Input your name please</Text>
+          <TextInput style={style.textInput} onChangeText={t => setName(t)}></TextInput>
+          <Button style={styles.button} onPress={()=>goToRules()}>Done</Button>
         </SafeAreaView>
       }
       {rules==true &&
@@ -43,19 +55,16 @@ export default function Home({navigation}) {
           POINTS: After each turn game calculates the sum
           for the dices you selected. Only the dices having
           the same spot count are calculated. Inside the
-          game you can not select same points from
-          {Constants.MIN_SPOT} to {Constants.MAX_SPOT} again.
+          game you can not select same points from {Constants.MIN_SPOT} to {Constants.MAX_SPOT} again.
         </Text>
         <Text style={styles.pikkuCont}>
-          GOAL: To get points as much as possible.
-          {Constants.BONUS_POINTS_LIMIT} points is the limit of
-          getting bonus which gives you {Constants.BONUS_POINTS} 
-          points more.
+          GOAL: To get points as much as possible. {Constants.BONUS_POINTS_LIMIT} points is the limit of
+          getting bonus which gives you {Constants.BONUS_POINTS} points more.
         </Text>
         <Text style={{fontSize:20, textAlign:"center"}}>
           Good luck, {name}!
         </Text>
-        <Button onPress={ goToGame() }>Play</Button>
+        <Button style={styles.button} onPress={()=>goToGame()}>Play</Button>
       </View>
       }
       <Footer/>
