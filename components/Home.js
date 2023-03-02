@@ -49,17 +49,13 @@ export default function Home({navigation}) {
       <View style={styles.container}>
         <Text style={styles.title}>Rules of the game</Text>
         <Text style={styles.pikkuCont}>
-          THE GAME: Upper section of the classic Yahtzee dice game. You have {Constants.NBR_OF_DICES} dices and for the every dice you have {Constants.NBR_OF_THROWS} throws. After each throw you can keep dices in order to get same dice spot counts as many as possible. In the end of the turn you must select your points from {Constants.MIN_SPOT} to {Constants.MAX_SPOT}. Game ends when all points have been selected. The order for selecting those is free.
+          THE GAME: Due to limited time, I have made a game where you have {Constants.NBR_OF_DICES} dices and for the every dice you have {Constants.NBR_OF_THROWS} throws. 
         </Text>
         <Text style={styles.pikkuCont}>
-          POINTS: After each turn game calculates the sum
-          for the dices you selected. Only the dices having
-          the same spot count are calculated. Inside the
-          game you can not select same points from {Constants.MIN_SPOT} to {Constants.MAX_SPOT} again.
+          POINTS: You can get {Constants.MAX_SPOT} to 30 points.
         </Text>
         <Text style={styles.pikkuCont}>
-          GOAL: To get points as much as possible. {Constants.BONUS_POINTS_LIMIT} points is the limit of
-          getting bonus which gives you {Constants.BONUS_POINTS} points more.
+          GOAL: To get points as much as possible. 30 points is the maximum.
         </Text>
         <Text style={{fontSize:20, textAlign:"center"}}>
           Good luck, {name}!

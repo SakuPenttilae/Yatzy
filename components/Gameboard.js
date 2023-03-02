@@ -102,7 +102,7 @@ export default function Gameboard({navigation, route}) {
             <Header/>
                 <ScrollView>
                     <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
-                    <Button style={styles.button} onPress={()=>navigation.navigate("Home")}>Change name?</Button>
+                    <Button style={styles.button} onPress={()=>goToScore()}>Change name?</Button>
                 </ScrollView>
                 <View style={styles.gameboard}>
                     <View style={{ flexDirection: "row"}}>{row}</View>
