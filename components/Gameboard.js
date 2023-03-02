@@ -5,31 +5,32 @@ import Header from "./Header"
 import Footer from "./Footer"
 import styles from "../styles/style";
 import * as Constants from "./Constants"
-import { MaterialCommunityIcons } from '@expo/vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 export default function Gameboard({navigation, route}) {
-
-    let row = [];
-    const board = [];
 
     const [throwsLeft, setThrowsLeft] = useState(Constants.NBR_OF_THROWS)
     const [nbrOfWins, setNbrOfWins] = useState(0)
     const [sum,setSum] = useState(0)
     const [status, setStatus] = useState("")
+    const [board, setBoard] = useState([])
 
     const throwDices = () => {
 
         let sum = 0;
+        let newBoard = []
 
         for (let i = 0; i < Constants.NBR_OF_DICES; i++) {
             let randomNumber = Math.floor(Math.random() * 6 + 1)
-            board[i] = "dice-" + randomNumber;
+            newBoard[i] = "dice-" + randomNumber;
             sum+= randomNumber;
         }
 
         setThrowsLeft(throwsLeft-1)
         setSum(sum)
-        
+        setBoard(newBoard)
+
     }
 
     const checkWinner = () => {
@@ -51,7 +52,9 @@ export default function Gameboard({navigation, route}) {
     }
 
     useEffect(() => {
+
         checkWinner();
+
         if (throwsLeft===Constants.NBR_OF_THROWS) {
             setStatus("Game has not started")
         }
@@ -61,30 +64,34 @@ export default function Gameboard({navigation, route}) {
         }
     },[throwsLeft])
 
+    const row = [];
+    
     for (let i = 0; i<Constants.NBR_OF_DICES; i++) {
             row.push(
-                //mitä vittua
+                <MaterialCommunityIcons 
+                name={board[i]}
+                key={"row" + i}
+                size={50}
+                color={"#ccb3ff"}
+            >
+            </MaterialCommunityIcons>
             )
     }
 
-    /*
-    if(route.params != null) {
-
-        if (route.params.name == name) {
-            //uusi peli tai set score 0
-            console.log("uusi peli")
-        } else {
-            setName(route.params.name)
-            console.log(name)
-        }
-    } */
+   /* <MaterialCommunityIcons 
+    name={board[i]}
+    key={"row" + i}
+    size={50}
+    color={"#ccb3ff"}
+>
+</MaterialCommunityIcons>*/
 
     if(route.params == null) {
         return (
         <SafeAreaView style={styles.container}>
             <Header/>
                 <ScrollView>
-                    <Button style={styles.button} onPress={()=>navigation.navigate("Home")}>Think you can fool me? Click here to input your name.</Button>
+                    <Button style={styles.button} onPress={()=>navigation.navigate("Home")}>Think you can fool me? Input your name.</Button>
                 </ScrollView>
             <Footer/>
         </SafeAreaView>
@@ -98,7 +105,7 @@ export default function Gameboard({navigation, route}) {
                     <Button style={styles.button} onPress={()=>navigation.navigate("Home")}>Change name?</Button>
                 </ScrollView>
                 <View style={styles.gameboard}>
-                    <View>{row}</View>
+                    <View style={{ flexDirection: "row"}}>{row}</View>
                     <Text>sum: {sum}</Text>
                     <Text>throws left: {throwsLeft}</Text>
                     <Text>wins: {nbrOfWins}</Text>
