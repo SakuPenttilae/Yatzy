@@ -1,6 +1,7 @@
 import { Button } from "react-native-paper"
 import { Text, View, SafeAreaView, ScrollView } from "react-native"
 import React, { useState, useEffect } from "react";
+import { Prompt } from 'react-router'
 import Header from "./Header"
 import Footer from "./Footer"
 import styles from "../styles/style";
@@ -11,56 +12,54 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 export default function Gameboard({navigation, route}) {
 
     const [throwsLeft, setThrowsLeft] = useState(Constants.NBR_OF_THROWS)
-    const [nbrOfWins, setNbrOfWins] = useState(0)
-    const [sum,setSum] = useState(0)
+    const [tempSum, setTempSum] = useState(0)
+    const [summa,setSumma] = useState(0)
     const [status, setStatus] = useState("")
     const [board, setBoard] = useState([])
+    const [sumProp, setSumProp] = useState(0)
 
     const throwDices = () => {
-
-        let sum = 0;
+        let newSum = 0
         let newBoard = []
 
         for (let i = 0; i < Constants.NBR_OF_DICES; i++) {
             let randomNumber = Math.floor(Math.random() * 6 + 1)
             newBoard[i] = "dice-" + randomNumber;
-            sum+= randomNumber;
+            newSum+= randomNumber;
         }
 
         setThrowsLeft(throwsLeft-1)
-        setSum(sum)
+
+        setTempSum(newSum)
+        
+        if (newSum > summa) {
+            setSumma(newSum)
+        }
+
         setBoard(newBoard)
 
     }
 
     const checkWinner = () => {
         
-        if (sum >= 23 && throwsLeft > 0) {
-            setNbrOfWins(nbrOfWins+1)
-            setStatus("You won")
-        } else if (sum >= 23 && throwsLeft === 0) {
-            setNbrOfWins(nbrOfWins+1)
-            setStatus("You won, game over")
-        } else if (nbrOfWins>0 && throwsLeft === 0) {
-            setStatus("You won, game over")
-        } else if (throwsLeft === 0) {
-            setStatus("Game over")
-        } else {
-            setStatus("Keep rolling")
-        }
+        if (throwsLeft > 0) {
+            setStatus(<Text>Nice. You got {tempSum}</Text>)
+        } 
 
     }
 
     useEffect(() => {
 
-        checkWinner();
+        checkWinner()
 
         if (throwsLeft===Constants.NBR_OF_THROWS) {
             setStatus("Game has not started")
         }
         if (throwsLeft<0) {
             setThrowsLeft(Constants.NBR_OF_THROWS-1)
-            setNbrOfWins(0)
+        }
+        if (throwsLeft === 0) {
+            setStatus(<Text>Your highest score was {summa}</Text>)
         }
     },[throwsLeft])
 
@@ -78,13 +77,14 @@ export default function Gameboard({navigation, route}) {
             )
     }
 
-   /* <MaterialCommunityIcons 
-    name={board[i]}
-    key={"row" + i}
-    size={50}
-    color={"#ccb3ff"}
->
-</MaterialCommunityIcons>*/
+    function goToScore() {
+        setSumProp(summa)
+        setSumma(0)
+        setTempSum(0)
+        setBoard([])
+        setThrowsLeft(Constants.NBR_OF_THROWS)
+        navigation.navigate("Home")
+    }
 
     if(route.params == null) {
         return (
@@ -106,14 +106,19 @@ export default function Gameboard({navigation, route}) {
                 </ScrollView>
                 <View style={styles.gameboard}>
                     <View style={{ flexDirection: "row"}}>{row}</View>
-                    <Text>sum: {sum}</Text>
                     <Text>throws left: {throwsLeft}</Text>
-                    <Text>wins: {nbrOfWins}</Text>
                     <Text>{status}</Text>
+                    {throwsLeft>0 && 
                     <Button 
                         onPress={()=>throwDices()}>
                             <Text>roll</Text>
-                    </Button>
+                    </Button>}
+                    {throwsLeft===0 && 
+                    <Button 
+                        onPress={()=>goToScore()}>
+                            <Text>Back to home</Text>
+                    </Button>}
+                    
                 </View>
             <Footer/>
         </SafeAreaView>
