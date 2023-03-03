@@ -7,6 +7,7 @@ import Footer from "./Footer"
 import styles from "../styles/style";
 import * as Constants from "./Constants"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 
 export default function Gameboard({navigation, route}) {
@@ -100,26 +101,27 @@ export default function Gameboard({navigation, route}) {
         return (
         <SafeAreaView style={styles.container}>
             <Header/>
-                <ScrollView>
-                    <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
-                    <Button style={styles.button} onPress={()=>goToScore()}>Change name?</Button>
-                </ScrollView>
-                <View style={styles.gameboard}>
-                    <View style={{ flexDirection: "row"}}>{row}</View>
-                    <Text>throws left: {throwsLeft}</Text>
-                    <Text>{status}</Text>
-                    {throwsLeft>0 && 
-                    <Button 
-                        onPress={()=>throwDices()}>
-                            <Text>roll</Text>
-                    </Button>}
-                    {throwsLeft===0 && 
-                    <Button 
-                        onPress={()=>goToScore()}>
-                            <Text>Back to home</Text>
-                    </Button>}
-                    
-                </View>
+                
+                    <ScrollView>
+                        <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
+                        <Button style={styles.button} onPress={()=>goToScore()}>Change name?</Button>
+                    </ScrollView>
+                    <View style={styles.gameboard}>
+                        <View style={{ flexDirection: "row"}}>{row}</View>
+                        <Text>throws left: {throwsLeft}</Text>
+                        <Text>{status}</Text>
+                        {throwsLeft>0 && 
+                        <Button 
+                            onPress={()=>throwDices()}>
+                                <Text>roll</Text>
+                        </Button>}
+                        {throwsLeft===0 && 
+                        <Button style={styles.button}
+                            onPress={()=>goToScore()}>
+                                <Text>Back to home</Text>
+                        </Button>}
+                        </View>
+                
             <Footer/>
         </SafeAreaView>
     )
