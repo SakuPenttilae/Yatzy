@@ -22,6 +22,8 @@ export default function App() {
           iconName = "home"
         } else if (route.name == "Gameboard") {
           iconName = "gamepad"
+        } else if (route.name == "Scoreboard") {
+          iconName = "list"
         }
         return <FontAwesome name={iconName} size={24} color={focused ? "#ccb3ff":"gray"} />
       },
