@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from "./components/Home";
 import Gameboard from "./components/Gameboard";
+import Scoreboard from "./components/Scoreboard";
 import styles from "./styles/style";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome } from '@expo/vector-icons';
@@ -30,6 +31,7 @@ export default function App() {
       >
       <Tab.Screen name='Home' component={Home}/>
       <Tab.Screen name='Gameboard' component={Gameboard}/>
+      <Tab.Screen name='Scoreboard' component={Scoreboard}/>
     </Tab.Navigator>
     </NavigationContainer>
   );

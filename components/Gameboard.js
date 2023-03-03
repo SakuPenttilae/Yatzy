@@ -62,6 +62,9 @@ export default function Gameboard({navigation, route}) {
         if (throwsLeft === 0) {
             setStatus(<Text>Your highest score was {summa}</Text>)
         }
+
+        setSumProp(summa)
+
     },[throwsLeft])
 
     const row = [];
@@ -79,12 +82,30 @@ export default function Gameboard({navigation, route}) {
     }
 
     function goToScore() {
-        setSumProp(summa)
+     
         setSumma(0)
         setTempSum(0)
         setBoard([])
         setThrowsLeft(Constants.NBR_OF_THROWS)
+        
+        navigation.navigate("Scoreboard", {
+            name: route.params.name,
+            result: sumProp,
+        })
+
+        setSumProp(0)
+    }
+
+    function goToHome() {
+     
+        setSumma(0)
+        setTempSum(0)
+        setBoard([])
+        setThrowsLeft(Constants.NBR_OF_THROWS)
+        setSumProp(0)
+
         navigation.navigate("Home")
+        
     }
 
     if(route.params == null) {
@@ -105,7 +126,7 @@ export default function Gameboard({navigation, route}) {
         <Row>
             <ScrollView>
                 <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
-                <Button style={styles.button} onPress={()=>goToScore()}>Change name?</Button>
+                <Button style={styles.button} onPress={()=>goToHome()}>Change name?</Button>
             </ScrollView>
         </Row>
         <Row>
