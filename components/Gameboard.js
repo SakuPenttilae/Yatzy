@@ -99,8 +99,9 @@ export default function Gameboard({navigation, route}) {
         )
     } else {
     return (
-    <Grid style={styles.gameboard}>
         
+    <Grid style={styles.gameboard}>
+        <Header />
         <Row>
             <ScrollView>
                 <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
@@ -130,6 +131,7 @@ export default function Gameboard({navigation, route}) {
             </Button>
         }
         </Row>
+        <Footer />
     </Grid>
 )
 }
