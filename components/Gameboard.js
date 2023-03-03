@@ -98,33 +98,40 @@ export default function Gameboard({navigation, route}) {
         </SafeAreaView>
         )
     } else {
-        return (
-        <SafeAreaView style={styles.container}>
-            <Header/>
-                
-                    <ScrollView>
-                        <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
-                        <Button style={styles.button} onPress={()=>goToScore()}>Change name?</Button>
-                    </ScrollView>
-                    <View style={styles.gameboard}>
-                        <View style={{ flexDirection: "row"}}>{row}</View>
-                        <Text>throws left: {throwsLeft}</Text>
-                        <Text>{status}</Text>
-                        {throwsLeft>0 && 
-                        <Button 
-                            onPress={()=>throwDices()}>
-                                <Text>roll</Text>
-                        </Button>}
-                        {throwsLeft===0 && 
-                        <Button style={styles.button}
-                            onPress={()=>goToScore()}>
-                                <Text>Back to home</Text>
-                        </Button>}
-                        </View>
-                
-            <Footer/>
-        </SafeAreaView>
-    )
+    return (
+    <Grid style={styles.gameboard}>
+        
+        <Row>
+            <ScrollView>
+                <Text style={styles.textAlign}>You are playing as {route.params.name}</Text>
+                <Button style={styles.button} onPress={()=>goToScore()}>Change name?</Button>
+            </ScrollView>
+        </Row>
+        <Row>
+            <View style={{ flexDirection: "row"}}>{row}</View>
+        </Row>
+        <Row>
+            <View>
+                <Text style={styles.textAlign}>throws left: {throwsLeft}</Text>
+                <Text>{status}</Text>
+            </View>
+        </Row>
+        <Row size={2}>
+        {throwsLeft>0 && 
+            <Button style={styles.button}
+                onPress={()=>throwDices()}>
+                    <Text>roll</Text>
+            </Button>
+        }
+        {throwsLeft===0 && 
+            <Button style={styles.button}
+                onPress={()=>goToScore()}>
+                <Text>Back to home</Text>
+            </Button>
+        }
+        </Row>
+    </Grid>
+)
 }
     
 }
