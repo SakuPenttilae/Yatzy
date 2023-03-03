@@ -10,6 +10,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 
+
 export default function Gameboard({navigation, route}) {
 
     const [throwsLeft, setThrowsLeft] = useState(Constants.NBR_OF_THROWS)
@@ -148,7 +149,7 @@ export default function Gameboard({navigation, route}) {
         {throwsLeft===0 && 
             <Button style={styles.button}
                 onPress={()=>goToScore()}>
-                <Text>Back to home</Text>
+                <Text>To scoreboard</Text>
             </Button>
         }
         </Row>
