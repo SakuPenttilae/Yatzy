@@ -9,8 +9,6 @@ import * as Constants from "./Constants"
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
-
-
 export default function Gameboard({navigation, route}) {
 
     const [throwsLeft, setThrowsLeft] = useState(Constants.NBR_OF_THROWS)
